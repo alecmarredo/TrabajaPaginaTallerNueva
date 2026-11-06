@@ -1,0 +1,15 @@
+<div class="register-page">
+  <div class="register-box">
+    <h1>Crear Cuenta</h1>
+    <p>Únete a District Store</p>
+    <form (ngSubmit)="registrar()">
+      <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Nombre completo" required>
+      <input type="email" name="email" [(ngModel)]="email" placeholder="Correo electrónico" required>
+      <input type="password" name="clave" [(ngModel)]="clave" placeholder="Contraseña" required>
+      <input type="password" name="confirmarClave" [(ngModel)]="confirmarClave" placeholder="Confirmar contraseña" required>
+      @if (error) { <p class="text-danger">{{ error }}</p> }
+      <button type="submit">Registrarse</button>
+    </form>
+    <span>¿Ya tienes cuenta? <a routerLink="/inicioSesion">Inicia sesión</a></span>
+  </div>
+</div>

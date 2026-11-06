@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <h1 class="cart-title">⭐ Favoritos</h1>
+  <div class="row">
+    @for (p of favoritosProductos; track p.id) {
+      <div class="col-lg-4 mb-4"><div class="card product-card">
+        <img [src]="imagen(p.imagen)" class="card-img-top" [alt]="p.nombre">
+        <div class="card-body"><h5 class="card-title">{{ p.nombre }}</h5><p class="price">${{ p.precio }}</p>
+          <button class="btn btn-warning" (click)="comprar(p)">Añadir al carrito</button>
+          <button class="favorite-icon" (click)="eliminar(p)">★</button>
+        </div></div></div>
+    } @empty { <h2>No hay favoritos</h2> }
+  </div>
+</div>

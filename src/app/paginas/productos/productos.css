@@ -1,0 +1,176 @@
+/* CONTENEDOR */
+
+.container {
+
+    padding: 50px 20px;
+
+}
+
+/* CARD */
+
+.card {
+
+    position: relative;
+
+    background: #111 !important;
+
+    border: 1px solid #c9a227 !important;
+
+    border-radius: 18px !important;
+
+    overflow: hidden;
+
+    transition: 0.3s ease;
+
+    width: 100%;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.4);
+}
+
+.card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 8px 25px rgba(201,162,39,0.3);
+}
+
+/* IMAGEN */
+
+.card-img-top {
+
+    width: 100%;
+
+    height: 300px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+/* BODY */
+
+.card-body {
+
+    padding: 20px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    height: 100%;
+}
+
+/* TITULO */
+
+.card-title {
+
+    color: white;
+
+    font-size: 26px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+/* DESCRIPCIÓN */
+
+.card-text {
+
+    color: #bbb;
+
+    font-size: 15px;
+
+    margin-bottom: 10px;
+}
+
+/* PRECIO */
+
+.price {
+
+    color: gold;
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    margin: 15px 0;
+}
+
+/* BOTÓN */
+
+.btn-primary {
+
+    display: inline-block;
+
+    background: gold !important;
+
+    color: black !important;
+
+    border: none !important;
+
+    padding: 12px 24px;
+
+    border-radius: 30px !important;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+    margin-top: auto;
+}
+
+.btn-primary:hover {
+
+    background: white !important;
+
+    color: black !important;
+
+    transform: scale(1.05);
+}
+
+/* FAVORITOS */
+
+.favorite-icon {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+    width: 50px;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #111;
+
+    color: gold;
+
+    font-size: 26px;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition: 0.3s;
+}
+
+.favorite-icon:hover {
+
+    background: gold;
+
+    color: black;
+
+    transform: scale(1.1);
+}

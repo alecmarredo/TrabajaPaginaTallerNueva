@@ -1,0 +1,50 @@
+import { Component } from '@angular/core';
+import * as i0 from "@angular/core";
+export class Contacto {
+    static ɵfac = function Contacto_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || Contacto)(); };
+    static ɵcmp = /*@__PURE__*/ i0.ɵɵdefineComponent({ type: Contacto, selectors: [["app-contacto"]], decls: 36, vars: 0, consts: [[1, "contact-page"], [1, "contact-header"], [1, "contact-container"], [1, "contact-form"], ["type", "text", "placeholder", "Tu nombre", "required", ""], ["type", "email", "placeholder", "Tu correo", "required", ""], ["type", "text", "placeholder", "Asunto", "required", ""], ["rows", "5", "placeholder", "Escribe tu mensaje...", "required", ""], ["type", "submit"], [1, "contact-info"], [1, "fas", "fa-map-marker-alt"], [1, "fas", "fa-phone"], [1, "fas", "fa-envelope"], [1, "social-contact"], ["href", "#"], [1, "fab", "fa-instagram"], [1, "fab", "fa-whatsapp"], [1, "fab", "fa-facebook"]], template: function Contacto_Template(rf, ctx) { if (rf & 1) {
+            i0.ɵɵdomElementStart(0, "div", 0)(1, "div", 1)(2, "h1");
+            i0.ɵɵtext(3, "Contacto");
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(4, "p");
+            i0.ɵɵtext(5, "Estamos para ayudarte. Comunicate con District Store.");
+            i0.ɵɵdomElementEnd()();
+            i0.ɵɵdomElementStart(6, "div", 2)(7, "div", 3)(8, "h2");
+            i0.ɵɵtext(9, "Env\u00EDanos un mensaje");
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(10, "form");
+            i0.ɵɵdomElement(11, "input", 4)(12, "input", 5)(13, "input", 6)(14, "textarea", 7);
+            i0.ɵɵdomElementStart(15, "button", 8);
+            i0.ɵɵtext(16, "Enviar mensaje");
+            i0.ɵɵdomElementEnd()()();
+            i0.ɵɵdomElementStart(17, "div", 9)(18, "h2");
+            i0.ɵɵtext(19, "Informaci\u00F3n");
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(20, "p");
+            i0.ɵɵdomElement(21, "i", 10);
+            i0.ɵɵtext(22, " Cipolletti, R\u00EDo Negro, Argentina");
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(23, "p");
+            i0.ɵɵdomElement(24, "i", 11);
+            i0.ɵɵtext(25, " +54 9 299 XXXXXXX");
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(26, "p");
+            i0.ɵɵdomElement(27, "i", 12);
+            i0.ɵɵtext(28, " styles32@gmail.com");
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(29, "div", 13)(30, "a", 14);
+            i0.ɵɵdomElement(31, "i", 15);
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(32, "a", 14);
+            i0.ɵɵdomElement(33, "i", 16);
+            i0.ɵɵdomElementEnd();
+            i0.ɵɵdomElementStart(34, "a", 14);
+            i0.ɵɵdomElement(35, "i", 17);
+            i0.ɵɵdomElementEnd()()()()();
+        } }, styles: [".contact-page[_ngcontent-%COMP%] {\r\n    min-height: 100vh;\r\n    padding: 50px 20px;\r\n    background: linear-gradient(to bottom, #000000, #111111, #1a1a1a);\r\n    color: white;\r\n    font-family: 'Montserrat', sans-serif;\r\n}\r\n\r\n.contact-header[_ngcontent-%COMP%] {\r\n    text-align: center;\r\n    margin-bottom: 50px;\r\n}\r\n\r\n.contact-header[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n    font-size: 48px;\r\n    color: gold;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.contact-header[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\r\n    font-size: 18px;\r\n    color: #ccc;\r\n}\r\n\r\n.contact-container[_ngcontent-%COMP%] {\r\n    max-width: 1200px;\r\n    margin: auto;\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 30px;\r\n    justify-content: center;\r\n}\r\n\r\n.contact-form[_ngcontent-%COMP%], \r\n.contact-info[_ngcontent-%COMP%] {\r\n    flex: 1;\r\n    min-width: 320px;\r\n    background: #111;\r\n    border: 1px solid #c9a227;\r\n    border-radius: 15px;\r\n    padding: 30px;\r\n    box-shadow: 0 4px 15px rgba(0,0,0,0.4);\r\n}\r\n\r\n.contact-form[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%], \r\n.contact-info[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\r\n    color: gold;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.contact-form[_ngcontent-%COMP%]   form[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.contact-form[_ngcontent-%COMP%]   input[_ngcontent-%COMP%], \r\n.contact-form[_ngcontent-%COMP%]   textarea[_ngcontent-%COMP%] {\r\n    margin-bottom: 15px;\r\n    padding: 12px;\r\n    border: 1px solid #333;\r\n    border-radius: 8px;\r\n    background: #000;\r\n    color: white;\r\n    outline: none;\r\n}\r\n\r\n.contact-form[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus, \r\n.contact-form[_ngcontent-%COMP%]   textarea[_ngcontent-%COMP%]:focus {\r\n    border-color: gold;\r\n}\r\n\r\n.contact-form[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\r\n    background: gold;\r\n    color: black;\r\n    border: none;\r\n    padding: 12px;\r\n    border-radius: 25px;\r\n    font-weight: bold;\r\n    cursor: pointer;\r\n    transition: 0.3s;\r\n}\r\n\r\n.contact-form[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover {\r\n    background: white;\r\n}\r\n\r\n.contact-info[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\r\n    font-size: 18px;\r\n    margin-bottom: 20px;\r\n    color: #ccc;\r\n}\r\n\r\n.contact-info[_ngcontent-%COMP%]   i[_ngcontent-%COMP%] {\r\n    color: gold;\r\n    margin-right: 10px;\r\n}\r\n\r\n.social-contact[_ngcontent-%COMP%] {\r\n    margin-top: 20px;\r\n}\r\n\r\n.social-contact[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\r\n    color: white;\r\n    font-size: 28px;\r\n    margin-right: 15px;\r\n    transition: 0.3s;\r\n}\r\n\r\n.social-contact[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\r\n    color: gold;\r\n    transform: scale(1.2);\r\n}\r\n\r\n\r\n@media (max-width: 768px) {\r\n    .contact-header[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n        font-size: 36px;\r\n    }\r\n}"] });
+}
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(Contacto, [{
+        type: Component,
+        args: [{ selector: 'app-contacto', imports: [], template: "<div class=\"contact-page\">\r\n\r\n    <div class=\"contact-header\">\r\n        <h1>Contacto</h1>\r\n        <p>Estamos para ayudarte. Comunicate con District Store.</p>\r\n    </div>\r\n\r\n    <div class=\"contact-container\">\r\n\r\n        <!-- Formulario -->\r\n        <div class=\"contact-form\">\r\n            <h2>Env\u00EDanos un mensaje</h2>\r\n\r\n            <form>\r\n                <input type=\"text\" placeholder=\"Tu nombre\" required>\r\n                <input type=\"email\" placeholder=\"Tu correo\" required>\r\n                <input type=\"text\" placeholder=\"Asunto\" required>\r\n                <textarea rows=\"5\" placeholder=\"Escribe tu mensaje...\" required></textarea>\r\n\r\n                <button type=\"submit\">Enviar mensaje</button>\r\n            </form>\r\n        </div>\r\n\r\n        <!-- Informaci\u00F3n -->\r\n        <div class=\"contact-info\">\r\n            <h2>Informaci\u00F3n</h2>\r\n\r\n            <p><i class=\"fas fa-map-marker-alt\"></i> Cipolletti, R\u00EDo Negro, Argentina</p>\r\n            <p><i class=\"fas fa-phone\"></i> +54 9 299 XXXXXXX</p>\r\n            <p><i class=\"fas fa-envelope\"></i> styles32@gmail.com</p>\r\n\r\n            <div class=\"social-contact\">\r\n                <a href=\"#\"><i class=\"fab fa-instagram\"></i></a>\r\n                <a href=\"#\"><i class=\"fab fa-whatsapp\"></i></a>\r\n                <a href=\"#\"><i class=\"fab fa-facebook\"></i></a>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>", styles: [".contact-page {\r\n    min-height: 100vh;\r\n    padding: 50px 20px;\r\n    background: linear-gradient(to bottom, #000000, #111111, #1a1a1a);\r\n    color: white;\r\n    font-family: 'Montserrat', sans-serif;\r\n}\r\n\r\n.contact-header {\r\n    text-align: center;\r\n    margin-bottom: 50px;\r\n}\r\n\r\n.contact-header h1 {\r\n    font-size: 48px;\r\n    color: gold;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.contact-header p {\r\n    font-size: 18px;\r\n    color: #ccc;\r\n}\r\n\r\n.contact-container {\r\n    max-width: 1200px;\r\n    margin: auto;\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 30px;\r\n    justify-content: center;\r\n}\r\n\r\n.contact-form,\r\n.contact-info {\r\n    flex: 1;\r\n    min-width: 320px;\r\n    background: #111;\r\n    border: 1px solid #c9a227;\r\n    border-radius: 15px;\r\n    padding: 30px;\r\n    box-shadow: 0 4px 15px rgba(0,0,0,0.4);\r\n}\r\n\r\n.contact-form h2,\r\n.contact-info h2 {\r\n    color: gold;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.contact-form form {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.contact-form input,\r\n.contact-form textarea {\r\n    margin-bottom: 15px;\r\n    padding: 12px;\r\n    border: 1px solid #333;\r\n    border-radius: 8px;\r\n    background: #000;\r\n    color: white;\r\n    outline: none;\r\n}\r\n\r\n.contact-form input:focus,\r\n.contact-form textarea:focus {\r\n    border-color: gold;\r\n}\r\n\r\n.contact-form button {\r\n    background: gold;\r\n    color: black;\r\n    border: none;\r\n    padding: 12px;\r\n    border-radius: 25px;\r\n    font-weight: bold;\r\n    cursor: pointer;\r\n    transition: 0.3s;\r\n}\r\n\r\n.contact-form button:hover {\r\n    background: white;\r\n}\r\n\r\n.contact-info p {\r\n    font-size: 18px;\r\n    margin-bottom: 20px;\r\n    color: #ccc;\r\n}\r\n\r\n.contact-info i {\r\n    color: gold;\r\n    margin-right: 10px;\r\n}\r\n\r\n.social-contact {\r\n    margin-top: 20px;\r\n}\r\n\r\n.social-contact a {\r\n    color: white;\r\n    font-size: 28px;\r\n    margin-right: 15px;\r\n    transition: 0.3s;\r\n}\r\n\r\n.social-contact a:hover {\r\n    color: gold;\r\n    transform: scale(1.2);\r\n}\r\n\r\n/* Responsive */\r\n@media (max-width: 768px) {\r\n    .contact-header h1 {\r\n        font-size: 36px;\r\n    }\r\n}"] }]
+    }], null, null); })();
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassDebugInfo(Contacto, { className: "Contacto", filePath: "src/app/paginas/contacto/contacto.ts", lineNumber: 9 }); })();

@@ -1,0 +1,13 @@
+<div class="login-page">
+  <div class="login-box">
+    <h1>Iniciar Sesión</h1>
+    <p>Bienvenido de nuevo a District Store</p>
+    <form (ngSubmit)="ingresar()">
+      <input type="email" name="email" [(ngModel)]="email" placeholder="Correo electrónico" required>
+      <input type="password" name="clave" [(ngModel)]="clave" placeholder="Contraseña" required>
+      @if (error) { <p class="text-danger">{{ error }}</p> }
+      <button type="submit">Ingresar</button>
+    </form>
+    <span>¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></span>
+  </div>
+</div>

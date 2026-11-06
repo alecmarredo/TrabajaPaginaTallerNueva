@@ -1,0 +1,190 @@
+<div class="container py-5">
+
+    <h1 class="cart-title">
+
+        <i class="bi bi-bag-fill cart-icon"></i>
+
+        Mi Carrito
+
+    </h1>
+
+    <div class="table-responsive">
+
+        <table class="table cart-table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+
+                        Imagen
+
+                    </th>
+
+                    <th>
+
+                        Nombre
+
+                    </th>
+
+                    <th class="text-center">
+
+                        Cantidad
+
+                    </th>
+
+                    <th class="text-center">
+
+                        Precio
+
+                    </th>
+
+                    <th class="text-center">
+
+                        Eliminar
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @if(carritoProductos.length > 0){
+
+                @for(productos of carritoProductos; track productos.id_producto){
+
+                <tr>
+
+                    <!-- IMAGEN -->
+
+                    <td class="text-center">
+
+                        <img [src]="imagen(productos.imagen)" [alt]="productos.nombre" class="product-img">
+
+                    </td>
+
+                    <!-- NOMBRE -->
+
+                    <td class="product-name">
+
+                        {{ productos.nombre }}
+
+                    </td>
+
+                    <!-- CANTIDAD -->
+
+                    <td class="text-center">
+
+                        <div class="quantity-box">
+
+                            <button class="qty-btn" (click)="disminuirCantidad(productos)">
+
+                                -
+
+                            </button>
+
+                            <span class="qty-number">
+
+                                {{ productos.cantidad }}
+
+                            </span>
+
+                            <button class="qty-btn" (click)="aumentarCantidad(productos)">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                    <!-- PRECIO -->
+
+                    <td class="text-center product-price">
+
+                        $
+
+                        {{ productos.precio_unitario * productos.cantidad }}
+
+                    </td>
+
+                    <!-- ELIMINAR -->
+
+                    <td class="text-center">
+
+                        <button class="delete-btn" (click)="eliminarProducto(productos)">
+
+                            🗑
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                }
+
+                }@else{
+
+                <tr>
+
+                    <td colspan="5">
+
+                        <div class="empty-cart">
+
+                            <h2>
+
+                                Carrito vacío
+
+                            </h2>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+        <!-- TOTAL -->
+
+        @if(carritoProductos.length > 0){
+
+        <div class="purchase-summary">
+
+            <div class="summary-info">
+
+                <h3>
+
+                    Total Compra
+
+                </h3>
+
+                <span>
+
+                    $
+
+                    {{ obtenerTotal() }}
+
+                </span>
+
+            </div>
+
+            <button class="nav-link btn btn-warning" (click)="finalizar()">Finalizar Compra</button>
+            <button class="btn btn-outline-danger mt-2" (click)="vaciar()">Vaciar carrito</button>
+
+        </div>
+
+        }
+
+    </div>
+
+</div>

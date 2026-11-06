@@ -1,0 +1,8 @@
+<div class="container py-5">
+  <h1>Mis compras</h1>
+  @for (c of compras; track c.id_compra) {
+    <div class="compra border-bottom py-3">Compra #{{ c.id_compra }} — {{ c.fecha }} — Total: ${{ c.total }}
+      <a [routerLink]="['/ticket', c.id_compra]">Ver ticket</a>
+    </div>
+  } @empty { <p>Todavía no hiciste compras.</p> }
+</div>

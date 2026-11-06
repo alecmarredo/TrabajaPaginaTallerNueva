@@ -1,0 +1,80 @@
+<div class="container mt-5">
+
+    <div class="row">
+
+        @for(productos of infoIndumentaria;
+        track productos.id){
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card product-card h-100">
+
+                <button class="favorite-icon" (click)="toggleFavorito(productos)">
+
+                    @if(
+
+                    favoritos.estaEnFavoritos(
+
+                    productos.id
+
+                    )
+
+                    ){
+
+                    ★
+
+                    }@else{
+
+                    ☆
+
+                    }
+
+                </button>
+
+                <img [src]="productos.img" class="card-img-top" [alt]="productos.alt">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="card-title">
+
+                        {{ productos.titulo }}
+
+                    </h5>
+
+                    <p class="card-text">
+
+                        {{ productos.descripcion }}
+
+                    </p>
+
+                    <p class="card-text">
+
+                        {{ productos.descripcion2 }}
+
+                    </p>
+
+                    <p class="price">
+
+                        $
+
+                        {{ productos.precio }}
+
+                    </p>
+
+                    <button class="btn btn-warning mt-auto" (click)="agregarAlCarrito(productos)">
+
+                        Añadir al carrito
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+</div>

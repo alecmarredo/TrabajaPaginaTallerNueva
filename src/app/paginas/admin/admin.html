@@ -1,0 +1,17 @@
+<div class="container py-5">
+  <h1>Panel de administración</h1>
+  @if (error) { <p class="text-danger">{{ error }}</p> }
+  <h2>Productos</h2>
+  <div class="row g-2 mb-3">
+    <div class="col-md-3"><input class="form-control" [(ngModel)]="form.nombre" placeholder="Nombre"></div>
+    <div class="col-md-3"><input class="form-control" [(ngModel)]="form.descripcion" placeholder="Descripción"></div>
+    <div class="col-md-2"><input class="form-control" type="number" [(ngModel)]="form.precio" placeholder="Precio"></div>
+    <div class="col-md-3"><input class="form-control" type="file" accept="image/*" (change)="alElegirArchivo($event)"></div>
+    <div class="col-md-1"><button class="btn btn-warning" (click)="guardar()">Guardar</button></div>
+  </div>
+  @for (p of productos; track p.id) { <div class="border-bottom py-2">{{ p.nombre }} — ${{ p.precio }} <button class="btn btn-sm btn-outline-primary" (click)="editar(p)">Editar</button> <button class="btn btn-sm btn-outline-danger" (click)="eliminar(p.id)">Eliminar</button></div> }
+  <h2 class="mt-4">Usuarios</h2>
+  @for (u of usuarios; track u.id) { <p>{{ u.nombre }} — {{ u.email }} ({{ u.rol }})</p> }
+  <h2 class="mt-4">Ventas</h2>
+  @for (v of ventas; track v.id_compra) { <p>#{{ v.id_compra }} — {{ v.nombre }} — ${{ v.total }} — {{ v.fecha }}</p> }
+</div>

@@ -1,0 +1,4 @@
+<div class="container py-5">
+  @if (ticket) { <h2>Ticket {{ ticket.numero_ticket }}</h2><p>Fecha: {{ ticket.fecha }}</p><a [href]="urlPdf" target="_blank" download>Descargar PDF</a> }
+  @else if (error) { <p>{{ error }}</p> } @else { <p>Cargando ticket...</p> }
+</div>

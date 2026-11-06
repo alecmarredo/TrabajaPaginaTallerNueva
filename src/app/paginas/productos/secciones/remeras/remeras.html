@@ -1,0 +1,23 @@
+<div class="buscador">
+  <input type="text" placeholder="Buscar..." [(ngModel)]="buscar" (keyup.enter)="cargar()" />
+  <button (click)="cargar()">Buscar</button>
+</div>
+
+@if (error) {
+  <p class="error">{{ error }}</p>
+}
+
+<div class="grilla">
+  @for (p of productos; track p.id) {
+    <div class="card">
+      <img [src]="imagen(p.imagen)" [alt]="p.nombre" />
+      <h3>{{ p.nombre }}</h3>
+      <p>{{ p.descripcion }}</p>
+      <p class="precio">{{ p.precio | currency }}</p>
+      <button (click)="agregar(p.id)">Agregar al carrito</button>
+      <button (click)="favorito(p.id)">♥</button>
+    </div>
+  } @empty {
+    <p>No hay productos para mostrar.</p>
+  }
+</div>
