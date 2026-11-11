@@ -1,44 +1,71 @@
-import { Component, OnInit } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Producto } from '../../../../models/producto.model';
-import { ProductService } from '../../../../servicio/product.service';
-import { favoritos } from '../../../../servicio/favoritos';
+import { Component } from '@angular/core';
+import { Indumentaria } from '../../../../models/indumentaria';
 import { carrito } from '../../../../servicio/carrito';
+import { favoritos } from '../../../../servicio/favoritos';
 
 @Component({
   selector: 'app-remeras',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './remeras.html',
-  styleUrls: ['./remeras.css']
+  styleUrl: './remeras.css'
 })
-export class Remeras implements OnInit {
-  productos: Producto[] = [];
-  buscar = '';
+
+export class Remeras {
+
+  public infoIndumentaria: Indumentaria[];
 
   constructor(
-    private productService: ProductService,
     private carrito: carrito,
-    private favoritoService: favoritos
-  ) {}
-
-   ngOnInit(): void {
-    this.cargar();
+    public favoritos: favoritos
+  ) {
+    this.infoIndumentaria = [
+      {
+        id: 1,
+        titulo: "Remera Nike Sportswear Air Hombre",
+        categoria: "Remeras",
+        descripcion: "Remera premium de algodón",
+        descripcion2: "Muy cómoda",
+        img: "assets/Nike 1.jpg",
+        alt: "Nike",
+        precio: 1500000
+      },
+      {
+        id: 2,
+        titulo: "Remera Nike Sportswear Club Hombre",
+        categoria: "Remeras",
+        descripcion: "Nike original",
+        descripcion2: "Muy cómoda",
+        img: "assets/Nike 2.jpg",
+        alt: "Nike",
+        precio: 85000
+      },
+      {
+        id: 3,
+        titulo: "Remera Jordan Chomba Break Hombre",
+        categoria: "Remeras",
+        descripcion: "Jordan original",
+        descripcion2: "Muy elegante",
+        img: "assets/Jordan.jpg",
+        alt: "Jordan",
+        precio: 120000
+      }
+    ];
   }
 
- cargar(): void {
-    this.productService.listar('remera').subscribe({
-      next: lista => (this.productos = lista),
-      error: err => console.error('Error al cargar productos', err)
+  toggleFavorito(productos: Indumentaria): void {
+    if (this.favoritos.estaEnFavoritos(productos.id)) {
+      this.favoritos.eliminar(productos.id).subscribe();
+    } else {
+      this.favoritos.agregar(productos.id).subscribe();
+    }
+  }
+
+  agregarAlCarrito(productos: Indumentaria): void {
+    this.carrito.agregar(productos.id, 1).subscribe({
+      next: () => alert("Producto agregado al carrito"),
+      error: () => alert("Iniciá sesión para usar el carrito")
     });
-  }
-
-  agregar(idProducto: number): void {
-    this.carrito.agregar(idProducto, 1).subscribe(() => alert('Agregado al carrito'));
-  }
-
-  favorito(idProducto: number): void {
-    this.favoritoService.agregar(idProducto).subscribe(() => alert('Agregado a favoritos'));
   }
 }

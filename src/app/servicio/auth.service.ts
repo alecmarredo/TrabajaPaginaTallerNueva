@@ -1,34 +1,130 @@
-import { Injectable, signal } from '@angular/core';
+/* 
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private apiUrl = 'http://localhost/api_proyecto/public/usuarios';
+
+  constructor(private http: HttpClient) {}
+
+  login(email: string, contraseña: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, contraseña });
+  }
+
+  registro(datos: { nombre: string; email: string; contraseña: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/registro`, datos);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  estaLogueado(): boolean {
+    return !!this.getToken();
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+  }
+
+  nombreUsuario(): string {
+  try {
+    const usuario = JSON.parse(localStorage.getItem('usuario') ?? 'null');
+    return usuario?.nombre ?? '';
+  } catch {
+    return '';
+  }
+}
+
+  esAdmin(): boolean {
+    const usuarioStr = localStorage.getItem('usuario');
+    if (usuarioStr) {
+      try {
+        const usuario = JSON.parse(usuarioStr);
+        return usuario.rol === 'admin';
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
+  }
+} */
+
+ import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private apiUrl = 'http://localhost/api_proyecto/public/usuarios';
-  private usuarioActual = signal<any>(typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem('usuario') || 'null') : null);
+  private apiUrl = 'http://localhost/api_proyecto/public';
+  private esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
+
+  private token = signal<string | null>(this.leer('token'));
+  private usuario = signal<any>(this.leerUsuario());
+
+  estaLogueado = computed(() => !!this.token());
+  nombreUsuario = computed(() => this.usuario()?.nombre ?? '');
+  usuarioActual = computed(() => this.usuario());
+
   constructor(private http: HttpClient) {}
 
-  registro(datos: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/registro`, datos);
-  }
   login(email: string, clave: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, contraseña: clave }).pipe(
-      tap(respuesta => {
-        localStorage.setItem('token', respuesta.token);
-        localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
-        this.usuarioActual.set(respuesta.usuario);
+    return this.http.post<any>(`${this.apiUrl}/usuarios/login`, { email, clave }).pipe(
+      tap(res => {
+        this.guardar('token', res.token);
+        this.guardar('usuario', JSON.stringify(res.usuario));
+        this.token.set(res.token);
+        this.usuario.set(res.usuario);
       })
     );
   }
-  logout(): void {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem('token');
-      localStorage.removeItem('usuario');
-    }
-    this.usuarioActual.set(null);
+
+  registro(datos: { nombre: string; email: string; clave: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/usuarios/registro`, datos);
   }
-  getToken(): string | null { return typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null; }
-  estaLogueado(): boolean { return this.usuarioActual() !== null; }
-  esAdmin(): boolean { return this.usuarioActual()?.rol === 'admin'; }
-  nombreUsuario(): string { return this.usuarioActual()?.nombre ?? ''; }
+
+  getToken(): string | null {
+    return this.token();
+  }
+
+  logout(): void {
+    this.borrar('token');
+    this.borrar('usuario');
+    this.token.set(null);
+    this.usuario.set(null);
+  }
+
+  esAdmin(): boolean {
+    return this.usuario()?.rol === 'admin';
+  }
+
+  // --- Acceso seguro a localStorage (solo en el navegador) ---
+  private leer(clave: string): string | null {
+    return this.esNavegador ? localStorage.getItem(clave) : null;
+  }
+
+  private guardar(clave: string, valor: string): void {
+    if (this.esNavegador) localStorage.setItem(clave, valor);
+  }
+
+  private borrar(clave: string): void {
+    if (this.esNavegador) localStorage.removeItem(clave);
+  }
+
+  private leerUsuario(): any {
+    try {
+      const str = this.leer('usuario');
+      return str ? JSON.parse(str) : null;
+    } catch {
+      return null;
+    }
+  }
 }
