@@ -1,17 +1,103 @@
-<div class="container py-5">
+<div class="admin container">
   <h1>Panel de administración</h1>
-  @if (error) { <p class="text-danger">{{ error }}</p> }
-  <h2>Productos</h2>
-  <div class="row g-2 mb-3">
-    <div class="col-md-3"><input class="form-control" [(ngModel)]="form.nombre" placeholder="Nombre"></div>
-    <div class="col-md-3"><input class="form-control" [(ngModel)]="form.descripcion" placeholder="Descripción"></div>
-    <div class="col-md-2"><input class="form-control" type="number" [(ngModel)]="form.precio" placeholder="Precio"></div>
-    <div class="col-md-3"><input class="form-control" type="file" accept="image/*" (change)="alElegirArchivo($event)"></div>
-    <div class="col-md-1"><button class="btn btn-warning" (click)="guardar()">Guardar</button></div>
+
+  <!-- FORMULARIO -->
+  <div class="panel">
+    <h2>{{ form.id ? 'Editar producto' : 'Nuevo producto' }}</h2>
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label>Nombre</label>
+        <input class="form-control" [(ngModel)]="form.nombre" placeholder="Nombre">
+      </div>
+      <div class="col-md-5">
+        <label>Descripción</label>
+        <input class="form-control" [(ngModel)]="form.descripcion" placeholder="Descripción">
+      </div>
+      <div class="col-md-3">
+        <label>Precio</label>
+        <input class="form-control" type="number" [(ngModel)]="form.precio" placeholder="Precio">
+      </div>
+
+      <div class="col-md-4">
+        <label>Categoría</label>
+        <select class="form-select" [(ngModel)]="form.categoria">
+          @for (c of categorias; track c) {
+            <option [value]="c">{{ c }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-md-4 d-flex align-items-end">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="oferta" [(ngModel)]="form.en_oferta">
+          <label class="form-check-label" for="oferta">Está en oferta</label>
+        </div>
+      </div>
+
+      @if (form.en_oferta) {
+        <div class="col-md-4">
+          <label>Precio de oferta</label>
+          <input class="form-control" type="number" [(ngModel)]="form.precio_oferta" placeholder="Precio de oferta">
+        </div>
+      }
+
+      <div class="col-md-8">
+        <label>Imagen</label>
+        <input class="form-control" type="file" accept="image/*" (change)="alElegirArchivo($event)">
+        @if (form.imagen && !archivo) {
+          <small class="text-muted">Imagen actual: {{ form.imagen }}</small>
+        }
+      </div>
+
+      <div class="col-md-4 d-flex align-items-end gap-2">
+        <button class="btn btn-warning" (click)="guardar()" [disabled]="guardando">
+          {{ form.id ? 'Actualizar' : 'Guardar' }}
+        </button>
+        @if (form.id) {
+          <button class="btn btn-outline-light" (click)="cancelar()">Cancelar</button>
+        }
+      </div>
+    </div>
   </div>
-  @for (p of productos; track p.id) { <div class="border-bottom py-2">{{ p.nombre }} — ${{ p.precio }} <button class="btn btn-sm btn-outline-primary" (click)="editar(p)">Editar</button> <button class="btn btn-sm btn-outline-danger" (click)="eliminar(p.id)">Eliminar</button></div> }
-  <h2 class="mt-4">Usuarios</h2>
-  @for (u of usuarios; track u.id) { <p>{{ u.nombre }} — {{ u.email }} ({{ u.rol }})</p> }
-  <h2 class="mt-4">Ventas</h2>
-  @for (v of ventas; track v.id_compra) { <p>#{{ v.id_compra }} — {{ v.nombre }} — ${{ v.total }} — {{ v.fecha }}</p> }
+
+  <!-- LISTA DE PRODUCTOS -->
+  <h2 class="mt-5">Productos ({{ productos.length }})</h2>
+  <div class="tabla">
+    @for (p of productos; track p.id) {
+      <div class="fila">
+        <img [src]="productService.imagen(p.imagen)" [alt]="p.nombre" class="mini">
+        <div class="info">
+          <strong>{{ p.nombre }}</strong>
+          <span class="cat">{{ p.categoria }}</span>
+          @if (esOferta(p)) { <span class="badge-oferta">OFERTA</span> }
+        </div>
+        <div class="precio">
+          @if (esOferta(p)) {
+            <s>${{ p.precio }}</s> <b>${{ p.precio_oferta }}</b>
+          } @else {
+            ${{ p.precio }}
+          }
+        </div>
+        <div class="acciones">
+          <button class="btn btn-sm btn-outline-warning" (click)="editar(p)">Editar</button>
+          <button class="btn btn-sm btn-outline-danger" (click)="eliminar(p.id)">Eliminar</button>
+        </div>
+      </div>
+    } @empty {
+      <p>Todavía no hay productos.</p>
+    }
+  </div>
+
+  <!-- USUARIOS -->
+  <h2 class="mt-5">Usuarios</h2>
+  @for (u of usuarios; track u.id) {
+    <p class="linea">{{ u.nombre }} — {{ u.email }} ({{ u.rol }})</p>
+  }
+
+  <!-- VENTAS -->
+  <h2 class="mt-5">Ventas</h2>
+  @for (v of ventas; track v.id_compra) {
+    <p class="linea">#{{ v.id_compra }} — {{ v.nombre }} — ${{ v.total }} — {{ v.fecha }}</p>
+  }
 </div>

@@ -27,9 +27,10 @@ export class InicioSesion {
     this.auth.login(this.email, this.clave).subscribe({
       next: (res) => {
         this.toast.exito(`¡Bienvenido, ${res.usuario?.nombre ?? ''}!`);
-        this.router.navigate([this.auth.esAdmin() ? '/admin' : '/inicio']);
+        this.router.navigate(['/']); // siempre al home, sea admin o usuario común
       },
       error: (err) => {
+        console.error('Error login:', err);
         this.error = err.status === 401
           ? 'Email o contraseña incorrectos.'
           : 'No se pudo conectar con el servidor.';

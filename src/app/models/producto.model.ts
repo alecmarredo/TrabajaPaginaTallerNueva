@@ -1,10 +1,10 @@
-export class Producto {
- constructor(
- public id: number,
- public nombre: string,
- public descripcion: string,
- public precio: number,
- public imagen: string,
- public disponibilidad: boolean // la tabla productos NO tiene este campo
- ) {}
+export interface Producto {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  precio: number | string;
+  imagen: string;
+  categoria?: string;
+  en_oferta?: number | string | boolean;
+  precio_oferta?: number | string | null;
 }

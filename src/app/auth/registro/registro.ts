@@ -1,8 +1,8 @@
-
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../servicio/auth.service';
+import { ToastService } from '../../toast.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,13 +17,18 @@ export class Registro {
   confirmarClave = '';
   error = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toast: ToastService
+  ) {}
 
   registrar(): void {
     this.error = '';
 
     if (this.clave !== this.confirmarClave) {
       this.error = 'Las contraseñas no coinciden.';
+      this.toast.error(this.error);
       return;
     }
 
@@ -33,19 +38,13 @@ export class Registro {
       clave: this.clave
     }).subscribe({
       next: () => {
-        this.auth.login(this.email, this.clave).subscribe({
-          next: () => {
-            alert('¡Cuenta creada correctamente!');
-            this.router.navigate(['/inicio']);
-          },
-          error: () => {
-            alert('Cuenta creada correctamente. Ahora iniciá sesión.');
-            this.router.navigate(['/inicioSesion']);
-          }
-        });
+        this.toast.exito('¡Cuenta creada! Ya podés iniciar sesión.');
+        this.router.navigate(['/inicio-sesion']);
       },
-      error: (e) => {
-        this.error = e.error?.error || 'No se pudo crear la cuenta.';
+      error: (err) => {
+        console.error('Error registro:', err);
+        this.error = err.error?.error ?? 'No se pudo crear la cuenta.';
+        this.toast.error(this.error);
       }
     });
   }

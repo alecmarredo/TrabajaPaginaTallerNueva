@@ -1,14 +1,19 @@
 <div class="offers-container">
   @for (producto of infoDescuento; track producto.id) {
     <div class="offer-card">
-      <span class="offer-badge">🔥 OFERTA</span>
+      <span class="offer-badge">🔥 -{{ descuento(producto) }}%</span>
       <img [src]="imagen(producto.imagen)" [alt]="producto.nombre" class="offer-img">
       <div class="offer-body">
         <h3 class="offer-title">{{ producto.nombre }}</h3>
         <p class="offer-description">{{ producto.descripcion }}</p>
-        <div class="prices"><span class="new-price">${{ producto.precio }}</span></div>
+        <div class="prices">
+          <span class="old-price">${{ producto.precio }}</span>
+          <span class="new-price">${{ producto.precio_oferta }}</span>
+        </div>
         <button class="btn-offer" (click)="agregarAlCarrito(producto)">Añadir al carrito</button>
       </div>
     </div>
-  } @empty { <p>No hay productos para mostrar.</p> }
+  } @empty {
+    <p>No hay ofertas por el momento.</p>
+  }
 </div>

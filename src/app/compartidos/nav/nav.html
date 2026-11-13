@@ -1,185 +1,66 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
 
   <!-- LOGO -->
-
   <a class="navbar-brand" routerLink="/">
-
     <img src="assets/Logo_pagina_png.png" alt="Logo" width="150">
-
   </a>
 
   <!-- BOTON RESPONSIVE -->
-
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-
-    <span class="navbar-toggler-icon">
-
-    </span>
-
+    <span class="navbar-toggler-icon"></span>
   </button>
 
   <!-- CONTENIDO -->
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <!-- LINKS -->
-
     <ul class="navbar-nav me-auto">
 
       <li class="nav-item">
-
-        <a class="nav-link active" routerLink="/">
-
-          Inicio
-
-        </a>
-
+        <a class="nav-link active" routerLink="/">Inicio</a>
       </li>
 
       <li class="nav-item">
-
-        <a class="nav-link" routerLink="/ofertas">
-
-          Ofertas
-
-        </a>
-
+        <a class="nav-link" routerLink="/ofertas">Ofertas</a>
       </li>
 
       <!-- FAVORITOS -->
-
       <li class="nav-item">
-
-        <a class="nav-link" routerLink="/favoritos">
-
-          Favoritos
-
-        </a>
-
+        <a class="nav-link" routerLink="/favoritos">Favoritos</a>
       </li>
 
       <!-- PRODUCTOS -->
-
       <li class="nav-item dropdown">
-
-        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-
-          Productos
-
-        </a>
-
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Productos</a>
         <ul class="dropdown-menu">
-
-          <li>
-
-            <a class="dropdown-item" routerLink="/productos">
-
-              Buzos
-
-            </a>
-
-          </li>
-
-          <li>
-
-            <a class="dropdown-item" routerLink="/remeras"> 
-
-              Remeras
-
-            </a>
-
-          </li>
-
-          <li>
-
-            <a class="dropdown-item" routerLink="/camperas">
-
-              Camperas
-
-            </a>
-
-          </li>
-
-          <li>
-
-            <a class="dropdown-item" routerLink="/calzado">
-
-              Calzado
-
-            </a>
-
-          </li>
-
-          <li>
-
-            <a class="dropdown-item" routerLink="/accesorios">
-
-              Accesorios
-
-            </a>
-
-          </li>
-
+          <li><a class="dropdown-item" routerLink="/buzos">Buzos</a></li>
+          <li><a class="dropdown-item" routerLink="/remeras">Remeras</a></li>
+          <li><a class="dropdown-item" routerLink="/camperas">Camperas</a></li>
+          <li><a class="dropdown-item" routerLink="/calzado">Calzado</a></li>
+          <li><a class="dropdown-item" routerLink="/accesorios">Accesorios</a></li>
         </ul>
-
       </li>
 
       <li class="nav-item">
-
-        <a class="nav-link" routerLink="/contacto">
-
-          Contacto
-
-        </a>
-
+        <a class="nav-link" routerLink="/contacto">Contacto</a>
       </li>
 
     </ul>
 
     <!-- BUSCADOR -->
-
     <form class="search-box">
-
       <input type="text" placeholder="Buscar productos...">
-
       <button type="submit">
-
-        <i class="bi bi-search">
-
-        </i>
-
+        <i class="bi bi-search"></i>
       </button>
-
     </form>
 
     <!-- BOTONES -->
-
     <div class="nav-buttons">
 
-      @if (auth.estaLogueado()) {
-        <span class="text-light me-2">Hola, {{ auth.nombreUsuario() }}</span>
-        @if (auth.esAdmin()) { <a routerLink="/admin" class="btn-register">Panel admin</a> }
-        <button type="button" class="btn-login" (click)="salir()">Salir</button>
-        <a routerLink="/compras" class="btn-register">Mis compras</a>
-      } @else {
-        <a routerLink="/inicioSesion" class="btn-login"><i class="bi bi-person-fill"></i> Iniciar sesión</a>
-        <a routerLink="/registro" class="btn-register"><i class="bi bi-person-plus-fill"></i> Registrarse</a>
+      <!-- BOTON PANEL ADMIN (solo admin) -->
+      @if (auth.esAdmin()) {
+        <a routerLink="/admin" class="btn-admin">
+          <i class="bi bi-gear-fill"></i> Panel admin
+        </a>
       }
-
-      <!-- CARRITO -->
-
-      <a routerLink="/carrito" class="btn-cart">
-
-        <i class="bi bi-cart-fill">
-
-        </i>
-
-        
-
-      </a>
-
-    </div>
-
-  </div>
-
-</nav>

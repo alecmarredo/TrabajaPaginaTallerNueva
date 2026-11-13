@@ -1,61 +1,4 @@
-/* 
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthService {
-  private apiUrl = 'http://localhost/api_proyecto/public/usuarios';
-
-  constructor(private http: HttpClient) {}
-
-  login(email: string, contraseña: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, contraseña });
-  }
-
-  registro(datos: { nombre: string; email: string; contraseña: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/registro`, datos);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  estaLogueado(): boolean {
-    return !!this.getToken();
-  }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-  }
-
-  nombreUsuario(): string {
-  try {
-    const usuario = JSON.parse(localStorage.getItem('usuario') ?? 'null');
-    return usuario?.nombre ?? '';
-  } catch {
-    return '';
-  }
-}
-
-  esAdmin(): boolean {
-    const usuarioStr = localStorage.getItem('usuario');
-    if (usuarioStr) {
-      try {
-        const usuario = JSON.parse(usuarioStr);
-        return usuario.rol === 'admin';
-      } catch (e) {
-        return false;
-      }
-    }
-    return false;
-  }
-} */
-
- import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -77,7 +20,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, clave: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/usuarios/login`, { email, clave }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/usuarios/login`, { email, contraseña: clave }).pipe(
       tap(res => {
         this.guardar('token', res.token);
         this.guardar('usuario', JSON.stringify(res.usuario));
@@ -88,7 +31,11 @@ export class AuthService {
   }
 
   registro(datos: { nombre: string; email: string; clave: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/usuarios/registro`, datos);
+    return this.http.post<any>(`${this.apiUrl}/usuarios/registro`, {
+      nombre: datos.nombre,
+      email: datos.email,
+      contraseña: datos.clave
+    });
   }
 
   getToken(): string | null {
