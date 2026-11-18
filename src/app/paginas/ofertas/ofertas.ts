@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ProductService } from '../../servicio/product.service';
 import { Producto } from '../../models/producto.model';
 import { carrito } from '../../servicio/carrito';
-import { ToastService } from '../../toast.service';
+import { ToastService } from '../../servicio/toast.service';
 
 @Component({
   selector: 'app-ofertas',
@@ -11,7 +11,7 @@ import { ToastService } from '../../toast.service';
   styleUrl: './ofertas.css'
 })
 export class Ofertas implements OnInit {
-  infoDescuento: Producto[] = [];
+  infoDescuento = signal<Producto[]>([]);
 
   constructor(
     private productService: ProductService,
@@ -20,7 +20,7 @@ export class Ofertas implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.listarOfertas().subscribe(lista => (this.infoDescuento = lista));
+    this.productService.listarOfertas().subscribe(lista => this.infoDescuento.set(lista));
   }
 
   agregarAlCarrito(p: Producto): void {

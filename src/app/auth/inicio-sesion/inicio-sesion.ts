@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../servicio/auth.service';
-import { ToastService } from '../../toast.service';
+import { ToastService } from '../../servicio/toast.service';
 
 @Component({
   selector: 'app-inicio-sesion',

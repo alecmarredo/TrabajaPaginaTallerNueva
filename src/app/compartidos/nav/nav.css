@@ -4,12 +4,8 @@
   border-bottom:2px solid #c9a227;
   box-shadow:0 2px 10px rgba(0,0,0,.5);
 }
+.navbar-collapse{ align-items:center; flex-wrap:wrap; row-gap:10px; }
 
-.navbar-collapse{
-  align-items:center;
-}
-
-/* LINKS */
 .navbar .nav-link{
   color:white !important;
   font-weight:500;
@@ -17,34 +13,12 @@
   font-family:'Montserrat',sans-serif;
   transition:.3s;
 }
+.navbar .nav-link:hover{ color:gold !important; transform:scale(1.05); }
 
-.navbar .nav-link:hover{
-  color:gold !important;
-  transform:scale(1.05);
-}
+.dropdown-menu{ background:#111; border:1px solid gold; }
+.dropdown-item{ color:white; transition:.3s; }
+.dropdown-item:hover{ background:gold; color:black; padding-left:20px; }
 
-.navbar .nav-link i{
-  margin-right:6px;
-}
-
-/* DROPDOWN */
-.dropdown-menu{
-  background:#111;
-  border:1px solid gold;
-}
-
-.dropdown-item{
-  color:white;
-  transition:.3s;
-}
-
-.dropdown-item:hover{
-  background:gold;
-  color:black;
-  padding-left:20px;
-}
-
-/* SEARCH */
 .search-box{
   display:flex;
   align-items:center;
@@ -54,21 +28,17 @@
   overflow:hidden;
   margin-left:auto;
   margin-right:20px;
+  min-width:0;
 }
-
 .search-box input{
   background:transparent;
   border:none;
   outline:none;
   padding:10px 15px;
   color:white;
-  width:180px;
+  width:140px;
 }
-
-.search-box input::placeholder{
-  color:#bbb;
-}
-
+.search-box input::placeholder{ color:#bbb; }
 .search-box button{
   border:none;
   background:gold;
@@ -76,76 +46,36 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  transition:.3s;
   cursor:pointer;
+  transition:.3s;
 }
+.search-box button:hover{ background:white; }
+.search-box i{ font-size:18px; }
 
-.search-box button:hover{
-  background:white;
-}
-
-.search-box i{
-  font-size:18px;
-}
-
-/* BOTONES */
 .nav-buttons{
   display:flex;
   gap:10px;
   align-items:center;
+  flex-shrink:0;
 }
 
 .btn-login,
-.btn-register{
-  padding:8px 15px;
-  border-radius:25px;
-  text-decoration:none !important;
-  transition:.3s;
-  white-space:nowrap;
-}
-
-.btn-login{
-  border:1px solid gold;
-  color:white !important;
-}
-
-.btn-login:hover{
-  background:gold;
-  color:black !important;
-}
-
-.btn-register{
-  background:gold;
-  color:black !important;
-  font-weight:bold;
-}
-
-.btn-register:hover{
-  background:white;
-}
-
-/* BOTON PANEL ADMIN */
+.btn-register,
 .btn-admin{
   padding:8px 15px;
   border-radius:25px;
-  border:1px solid gold;
-  color:gold !important;
   text-decoration:none !important;
-  font-weight:600;
-  white-space:nowrap;
   transition:.3s;
+  white-space:nowrap;
 }
+.btn-login{ border:1px solid gold; color:white !important; }
+.btn-login:hover{ background:gold; color:black !important; }
+.btn-register{ background:gold; color:black !important; font-weight:bold; }
+.btn-register:hover{ background:white; }
+.btn-admin{ border:1px solid gold; color:gold !important; font-weight:600; }
+.btn-admin:hover{ background:gold; color:black !important; }
 
-.btn-admin:hover{
-  background:gold;
-  color:black !important;
-}
-
-/* ICONO DE USUARIO + MENU */
-.usuario-menu{
-  position:relative;
-}
-
+.usuario-menu{ position:relative; }
 .btn-usuario{
   width:50px;
   height:50px;
@@ -159,16 +89,8 @@
   cursor:pointer;
   transition:.3s;
 }
-
-.btn-usuario i{
-  font-size:24px;
-}
-
-.btn-usuario:hover{
-  background:gold;
-  color:black;
-  transform:scale(1.08);
-}
+.btn-usuario i{ font-size:24px; }
+.btn-usuario:hover{ background:gold; color:black; transform:scale(1.08); }
 
 .menu-desplegable{
   position:absolute;
@@ -183,13 +105,61 @@
   z-index:2000;
   display:flex;
   flex-direction:column;
-  animation:bajar .18s ease;
 }
-
 .menu-encabezado{
   padding:10px 16px;
   color:gold;
   font-weight:600;
-  font-family:'Montserrat',sans-serif;
   border-bottom:1px solid #333;
-   }
+  margin-bottom:6px;
+}
+.menu-desplegable a,
+.cerrar-sesion{
+  padding:10px 16px;
+  color:white;
+  text-decoration:none;
+  background:none;
+  border:none;
+  text-align:left;
+  font-size:.95rem;
+  cursor:pointer;
+  transition:.2s;
+}
+.menu-desplegable a i,
+.cerrar-sesion i{ margin-right:8px; }
+.menu-desplegable a:hover,
+.cerrar-sesion:hover{ background:gold; color:black; }
+.cerrar-sesion{ border-top:1px solid #333; margin-top:6px; color:#ff6b6b; }
+
+.btn-cart{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:gold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:black !important;
+  transition:.3s;
+}
+.btn-cart:hover{ background:white; transform:scale(1.08); }
+.btn-cart i{ font-size:24px; }
+
+.navbar-brand img{ transition:.3s; }
+.navbar-brand img:hover{ transform:scale(1.08); }
+
+@media(max-width:991px){
+  .navbar-collapse{ flex-direction:column; align-items:stretch; }
+  .search-box{ width:100%; margin:20px 0; }
+  .search-box input{ width:100%; }
+  .nav-buttons{ flex-direction:column; width:100%; }
+  .btn-login, .btn-register, .btn-admin, .btn-cart{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+    margin-bottom:10px;
+  }
+  .usuario-menu{ width:100%; display:flex; justify-content:center; }
+  .menu-desplegable{ right:auto; left:50%; transform:translateX(-50%); }
+}

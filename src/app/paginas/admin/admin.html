@@ -1,7 +1,6 @@
 <div class="admin container">
   <h1>Panel de administración</h1>
 
-  <!-- FORMULARIO -->
   <div class="panel">
     <h2>{{ form.id ? 'Editar producto' : 'Nuevo producto' }}</h2>
 
@@ -51,7 +50,7 @@
       </div>
 
       <div class="col-md-4 d-flex align-items-end gap-2">
-        <button class="btn btn-warning" (click)="guardar()" [disabled]="guardando">
+        <button class="btn btn-warning" (click)="guardar()" [disabled]="guardando()">
           {{ form.id ? 'Actualizar' : 'Guardar' }}
         </button>
         @if (form.id) {
@@ -61,10 +60,9 @@
     </div>
   </div>
 
-  <!-- LISTA DE PRODUCTOS -->
-  <h2 class="mt-5">Productos ({{ productos.length }})</h2>
+  <h2 class="mt-5">Productos ({{ productos().length }})</h2>
   <div class="tabla">
-    @for (p of productos; track p.id) {
+    @for (p of productos(); track p.id) {
       <div class="fila">
         <img [src]="productService.imagen(p.imagen)" [alt]="p.nombre" class="mini">
         <div class="info">
@@ -89,15 +87,13 @@
     }
   </div>
 
-  <!-- USUARIOS -->
   <h2 class="mt-5">Usuarios</h2>
-  @for (u of usuarios; track u.id) {
+  @for (u of usuarios(); track u.id) {
     <p class="linea">{{ u.nombre }} — {{ u.email }} ({{ u.rol }})</p>
   }
 
-  <!-- VENTAS -->
   <h2 class="mt-5">Ventas</h2>
-  @for (v of ventas; track v.id_compra) {
+  @for (v of ventas(); track v.id_compra) {
     <p class="linea">#{{ v.id_compra }} — {{ v.nombre }} — ${{ v.total }} — {{ v.fecha }}</p>
   }
 </div>

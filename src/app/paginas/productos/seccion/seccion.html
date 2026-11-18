@@ -1,0 +1,35 @@
+<div class="contenedor">
+  <h2 class="titulo-seccion">{{ categoria() }}</h2>
+
+  @if (error()) { <p class="text-danger">{{ error() }}</p> }
+
+  <div class="grilla">
+    @for (p of productos(); track p.id) {
+      <div class="tarjeta">
+        <div class="tarjeta-img">
+          @if (esOferta(p)) { <span class="etiqueta-oferta">OFERTA</span> }
+          <button class="btn-fav" (click)="favorito(p.id)" title="Agregar a favoritos">☆</button>
+          <img [src]="imagen(p.imagen)" [alt]="p.nombre">
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <h5 class="tarjeta-titulo">{{ p.nombre }}</h5>
+          <p class="tarjeta-desc">{{ p.descripcion }}</p>
+
+          <div class="tarjeta-precio">
+            @if (esOferta(p)) {
+              <span class="precio-actual">${{ p.precio_oferta }}</span>
+              <span class="precio-viejo">${{ p.precio }}</span>
+            } @else {
+              <span class="precio-actual">${{ p.precio }}</span>
+            }
+          </div>
+
+          <button class="btn-carrito" (click)="agregar(p.id)">Añadir al carrito</button>
+        </div>
+      </div>
+    } @empty {
+      <p class="vacio">Todavía no hay productos en esta sección.</p>
+    }
+  </div>
+</div>

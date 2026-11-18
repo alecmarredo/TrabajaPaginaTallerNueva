@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../servicio/auth.service';
-import { ToastService } from '../../toast.service';
+import { ToastService } from '../../servicio/toast.service';
 
 @Component({
   selector: 'app-nav',
@@ -27,7 +27,6 @@ export class Nav {
     this.menuAbierto.set(false);
   }
 
-  // Cierra el menú al hacer clic fuera de él
   @HostListener('document:click', ['$event'])
   clicFuera(e: Event): void {
     const caja = this.el.nativeElement.querySelector('.usuario-menu');

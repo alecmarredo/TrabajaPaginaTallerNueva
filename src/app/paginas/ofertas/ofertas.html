@@ -1,19 +1,41 @@
-<div class="offers-container">
-  @for (producto of infoDescuento; track producto.id) {
-    <div class="offer-card">
-      <span class="offer-badge">🔥 -{{ descuento(producto) }}%</span>
-      <img [src]="imagen(producto.imagen)" [alt]="producto.nombre" class="offer-img">
-      <div class="offer-body">
-        <h3 class="offer-title">{{ producto.nombre }}</h3>
-        <p class="offer-description">{{ producto.descripcion }}</p>
-        <div class="prices">
-          <span class="old-price">${{ producto.precio }}</span>
-          <span class="new-price">${{ producto.precio_oferta }}</span>
+<div class="contenedor">
+  <h2 class="titulo-seccion">Ofertas</h2>
+
+  <div class="grilla">
+    @for (p of infoDescuento(); track p.id) {
+      <div class="tarjeta">
+
+        <div class="tarjeta-img">
+          <span class="etiqueta-oferta">
+            -{{ descuento(p) }}%
+          </span>
+
+          <img [src]="imagen(p.imagen)" [alt]="p.nombre">
         </div>
-        <button class="btn-offer" (click)="agregarAlCarrito(producto)">Añadir al carrito</button>
+
+        <div class="tarjeta-cuerpo">
+          <h5 class="tarjeta-titulo">{{ p.nombre }}</h5>
+
+          <p class="tarjeta-desc">{{ p.descripcion }}</p>
+
+          <div class="tarjeta-precio">
+            <span class="precio-actual">
+              ${{ p.precio_oferta }}
+            </span>
+
+            <span class="precio-viejo">
+              ${{ p.precio }}
+            </span>
+          </div>
+
+          <button class="btn-carrito" (click)="agregarAlCarrito(p)">
+            Añadir al carrito
+          </button>
+        </div>
+
       </div>
-    </div>
-  } @empty {
-    <p>No hay ofertas por el momento.</p>
-  }
+    } @empty {
+      <p class="vacio">No hay ofertas por el momento.</p>
+    }
+  </div>
 </div>

@@ -1,25 +1,40 @@
-<div class="container mt-5">
-  <div class="d-flex gap-2 mb-4">
+<div class="contenedor">
+  <h2 class="titulo-seccion">Productos</h2>
+
+  <div class="buscador">
     <input class="form-control" [(ngModel)]="buscar" (keyup.enter)="cargar()" placeholder="Buscar productos...">
     <button class="btn btn-warning" (click)="cargar()">Buscar</button>
   </div>
-  @if (error) { <p class="text-danger">{{ error }}</p> }
-  <div class="row">
-    @for (p of productos; track p.id) {
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card product-card h-100">
-          <img [src]="imagen(p.imagen)" class="card-img-top" [alt]="p.nombre">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">{{ p.nombre }}</h5>
-            <p class="card-text">{{ p.descripcion }}</p>
-            <p class="price">${{ p.precio }}</p>
-            <div class="mt-auto d-flex gap-2">
-              <button class="btn btn-primary" (click)="agregar(p.id)">Añadir al carrito</button>
-              <button class="btn btn-outline-warning" (click)="favorito(p.id)">☆</button>
-            </div>
+
+  @if (error()) { <p class="text-danger">{{ error() }}</p> }
+
+  <div class="grilla">
+    @for (p of productos(); track p.id) {
+      <div class="tarjeta">
+        <div class="tarjeta-img">
+          @if (esOferta(p)) { <span class="etiqueta-oferta">OFERTA</span> }
+          <button class="btn-fav" (click)="favorito(p.id)" title="Agregar a favoritos">☆</button>
+          <img [src]="imagen(p.imagen)" [alt]="p.nombre">
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <h5 class="tarjeta-titulo">{{ p.nombre }}</h5>
+          <p class="tarjeta-desc">{{ p.descripcion }}</p>
+
+          <div class="tarjeta-precio">
+            @if (esOferta(p)) {
+              <span class="precio-actual">${{ p.precio_oferta }}</span>
+              <span class="precio-viejo">${{ p.precio }}</span>
+            } @else {
+              <span class="precio-actual">${{ p.precio }}</span>
+            }
           </div>
+
+          <button class="btn-carrito" (click)="agregar(p.id)">Añadir al carrito</button>
         </div>
       </div>
-    } @empty { <p>No se encontraron productos.</p> }
+    } @empty {
+      <p class="vacio">No se encontraron productos.</p>
+    }
   </div>
 </div>

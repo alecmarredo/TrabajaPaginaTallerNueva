@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../servicio/product.service';
 import { Producto } from '../../models/producto.model';
 import { carrito } from '../../servicio/carrito';
 import { favoritos } from '../../servicio/favoritos';
-import { ToastService } from '../../toast.service';
+import { ToastService } from '../../servicio/toast.service';
 
 @Component({
   selector: 'app-productos',
@@ -13,9 +13,9 @@ import { ToastService } from '../../toast.service';
   styleUrl: './productos.css'
 })
 export class Productos implements OnInit {
-  productos: Producto[] = [];
+  productos = signal<Producto[]>([]);
+  error = signal('');
   buscar = '';
-  error = '';
 
   constructor(
     private productService: ProductService,
@@ -29,10 +29,10 @@ export class Productos implements OnInit {
   }
 
   cargar(): void {
-    this.error = '';
+    this.error.set('');
     this.productService.listar(this.buscar).subscribe({
-      next: lista => (this.productos = lista),
-      error: () => (this.error = 'No se pudieron cargar los productos.')
+      next: lista => this.productos.set(lista),
+      error: () => this.error.set('No se pudieron cargar los productos.')
     });
   }
 
@@ -52,5 +52,9 @@ export class Productos implements OnInit {
 
   imagen(nombre: string): string {
     return this.productService.imagen(nombre);
+  }
+
+  esOferta(p: Producto): boolean {
+    return Number(p.en_oferta) === 1;
   }
 }

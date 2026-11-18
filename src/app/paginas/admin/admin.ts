@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProductService } from '../../servicio/product.service';
-import { ToastService } from '../../toast.service';
+import { ToastService } from '../../servicio/toast.service';
 import { Producto } from '../../models/producto.model';
 
 @Component({
@@ -12,14 +12,14 @@ import { Producto } from '../../models/producto.model';
   styleUrl: './admin.css'
 })
 export class Admin implements OnInit {
-  productos: Producto[] = [];
-  usuarios: any[] = [];
-  ventas: any[] = [];
+  productos = signal<Producto[]>([]);
+  usuarios = signal<any[]>([]);
+  ventas = signal<any[]>([]);
   categorias = ['buzos', 'remeras', 'camperas', 'calzado', 'accesorios'];
 
   form: Partial<Producto> = this.formVacio();
   archivo: File | null = null;
-  guardando = false;
+  guardando = signal(false);
   private api = 'http://localhost/api_proyecto/public';
 
   constructor(
@@ -37,13 +37,13 @@ export class Admin implements OnInit {
   }
 
   cargarTodo(): void {
-    this.productService.listar().subscribe(l => (this.productos = l));
+    this.productService.listar().subscribe(l => this.productos.set(l));
     this.http.get<any[]>(`${this.api}/usuarios/todos`).subscribe({
-      next: l => (this.usuarios = l),
+      next: l => this.usuarios.set(l),
       error: () => this.toast.error('No se pudieron cargar los usuarios.')
     });
     this.http.get<any[]>(`${this.api}/compras/todas`).subscribe({
-      next: l => (this.ventas = l),
+      next: l => this.ventas.set(l),
       error: () => this.toast.error('No se pudieron cargar las ventas.')
     });
   }
@@ -62,7 +62,7 @@ export class Admin implements OnInit {
       this.toast.error('Indicá el precio de oferta.');
       return;
     }
-    this.guardando = true;
+    this.guardando.set(true);
 
     if (this.archivo) {
       this.productService.subirImagen(this.archivo).subscribe({
@@ -71,7 +71,7 @@ export class Admin implements OnInit {
           this.guardarProducto();
         },
         error: () => {
-          this.guardando = false;
+          this.guardando.set(false);
           this.toast.error('No se pudo subir la imagen.');
         }
       });
@@ -91,10 +91,10 @@ export class Admin implements OnInit {
         this.toast.exito(editando ? 'Producto actualizado' : 'Producto creado');
         this.cancelar();
         this.cargarTodo();
-        this.guardando = false;
+        this.guardando.set(false);
       },
       error: () => {
-        this.guardando = false;
+        this.guardando.set(false);
         this.toast.error('No se pudo guardar el producto.');
       }
     });
